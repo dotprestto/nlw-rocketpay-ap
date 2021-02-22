@@ -7,6 +7,8 @@ defmodule NlwRocketpayApWeb.Router do
 
   scope "/api", NlwRocketpayApWeb do
     pipe_through :api
+
+    get "/", WelcomeController, :index
   end
 
   # Enables LiveDashboard only for development
