@@ -7,7 +7,8 @@ defmodule NlwRocketpayAp.Numbers do
 
   defp handle_file({:ok, result}) do
     result = result |> String.split(",")
-    |> Enum.map(fn number -> String.to_integer(number) end)
+    # Stream é um operador lazy, só executa quando você precisa
+    |> Stream.map(fn number -> String.to_integer(number) end)
     |> Enum.sum()
     {:ok, %{result: result}}
   end
