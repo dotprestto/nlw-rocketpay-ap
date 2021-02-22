@@ -11,6 +11,6 @@ defmodule NlwRocketpayAp.Numbers do
     |> Enum.sum()
     {:ok, %{result: result}}
   end
-  defp handle_file({:error, _reason}), do: {:error, "Invalid file!"}
+  defp handle_file({:error, _reason}), do: {:error, %{ message: "Invalid file!" }}
 
 end
