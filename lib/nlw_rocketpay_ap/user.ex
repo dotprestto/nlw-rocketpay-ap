@@ -2,6 +2,7 @@ defmodule NlwRocketpayAp.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Ecto.Changeset
+  alias NlwRocketpayAp.Account
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @required_params [:name, :age, :email, :password, :nickname]
@@ -13,6 +14,7 @@ defmodule NlwRocketpayAp.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :nickname, :string
+    has_one :account, Account
 
     timestamps()
   end
