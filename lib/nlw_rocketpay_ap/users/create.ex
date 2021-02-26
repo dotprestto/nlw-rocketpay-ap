@@ -9,7 +9,7 @@ defmodule NlwRocketpayAp.Users.Create do
       insert_account(repo, user.id)
     end)
     |> Multi.run(:preload_data, fn repo, %{create_user: user} ->
-      preload_data(repo, user.id)
+      preload_data(repo, user)
     end)
     |> run_transaction()
   end
