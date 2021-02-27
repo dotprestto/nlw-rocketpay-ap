@@ -22,6 +22,10 @@ config :nlw_rocketpay_ap, NlwRocketpayAp.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+config :nlw_rocketpay_ap, :basic_auth,
+  username: "banana",
+  password: "123"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
