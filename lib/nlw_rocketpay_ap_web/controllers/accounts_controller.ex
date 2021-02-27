@@ -21,4 +21,13 @@ defmodule NlwRocketpayApWeb.AccountsController do
     end
 
   end
+
+  def transaction(conn, params) do
+    with {:ok, %Account{} = account} <- NlwRocketpayAp.withdraw(params) do
+      conn
+      |> put_status(:created)
+      |> render("update.json", account: account)
+    end
+
+  end
 end

@@ -3,9 +3,12 @@ defmodule NlwRocketpayAp.Accounts.Operation do
   alias NlwRocketpayAp.Account
 
   def call(%{"id" => id, "value" => value}, operation) do
+
+    operation_name = account_operation_name(operation)
     Multi.new()
-    |> Multi.run(:account, fn repo, _changes -> get_account(repo, id) end)
-    |> Multi.run(:update_balance, fn repo, %{account: account} ->
+    |> Multi.run(operation_name, fn repo, _changes -> get_account(repo, id) end)
+    |> Multi.run(operation, fn repo, changes ->
+        account = Map.get(changes, operation_name)
         update_balance(repo, account, value, operation)
       end)
   end
@@ -18,8 +21,10 @@ defmodule NlwRocketpayAp.Accounts.Operation do
   end
 
   defp update_balance(repo, account, value, operation) do
+    IO.inspect(account.balance)
     account
     |> operation(value, operation)
+    |> IO.inspect()
     |> update_account(repo, account)
   end
 
@@ -40,5 +45,10 @@ defmodule NlwRocketpayAp.Accounts.Operation do
     params
     |> Account.changeset(account)
     |> repo.update()
+    |> IO.inspect()
+  end
+
+  defp account_operation_name(operation) do
+    "account_#{Atom.to_string(operation)}" |> String.to_atom()
   end
 end
