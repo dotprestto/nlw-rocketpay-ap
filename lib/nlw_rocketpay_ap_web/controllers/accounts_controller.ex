@@ -24,7 +24,10 @@ defmodule NlwRocketpayApWeb.AccountsController do
   end
 
   def transaction(conn, params) do
-    with {:ok, %TransactionResponse{} = transaction} <- NlwRocketpayAp.transaction(params) do
+    task = Task.async(fn -> NlwRocketpayAp.transaction(params) end)
+    # Quando não se preocupa com retorno imediato, ex: um email ou gerar relatório
+    # Task.start(fn -> NlwRocketpayAp.transaction(params) end)
+    with {:ok, %TransactionResponse{} = transaction} <- Task.await(task) do
       conn
       |> put_status(:created)
       |> render("transaction.json", transaction: transaction)
