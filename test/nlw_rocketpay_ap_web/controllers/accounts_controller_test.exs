@@ -1,5 +1,5 @@
 defmodule NlwRocketpayApWeb.AccountsControllerTest do
-  use NlwRocketpayApWeb.ConnCase
+  use NlwRocketpayApWeb.ConnCase, async: true
   alias NlwRocketpayAp.{Account, User}
 
   describe "deposit/2" do

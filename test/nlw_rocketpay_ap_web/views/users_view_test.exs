@@ -1,5 +1,5 @@
 defmodule NlwRocketpayApWeb.UsersViewTest do
-  use NlwRocketpayApWeb.ConnCase
+  use NlwRocketpayApWeb.ConnCase, async: true
   import Phoenix.View
 
   alias NlwRocketpayAp.{Account, User}
