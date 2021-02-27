@@ -21,10 +21,8 @@ defmodule NlwRocketpayAp.Accounts.Operation do
   end
 
   defp update_balance(repo, account, value, operation) do
-    IO.inspect(account.balance)
     account
     |> operation(value, operation)
-    |> IO.inspect()
     |> update_account(repo, account)
   end
 
@@ -45,7 +43,6 @@ defmodule NlwRocketpayAp.Accounts.Operation do
     params
     |> Account.changeset(account)
     |> repo.update()
-    |> IO.inspect()
   end
 
   defp account_operation_name(operation) do
